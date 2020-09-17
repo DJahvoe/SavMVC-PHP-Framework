@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    #Avoid confusion between route /test and /test.php
+    Options -Multiviews
+
+    #Turn on RewriteEngine
+    RewriteEngine On
+
+    #Directory Root
+    RewriteBase /savmvc/public
+
+    #Check if file not found on /public, continue to RewriteRule
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    #Route to index.php (set as entry point)
+    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
